@@ -89,95 +89,100 @@ $$
 $$
 
 
+# ZKPパイプライン概要（Circom / snarkjs）
 
-
-# ZKP Pipeline Overview (Circom / snarkjs)
-
-This note is for beginners trying to understand the ZKP workflow using Circom and snarkjs.
+このノートは、Circom と snarkjs を使ったゼロ知識証明（ZKP）の基本的なワークフローを理解したい初学者向けのまとめです。
 
 ---
 
-## 1. Witness Calculator
+## 1. Witness Calculator（witness生成）
 
-The witness calculator is used to generate the **witness** from input data based on a compiled circuit.
+witness calculator は、コンパイルされた回路と入力データから **witness（証人データ）** を生成するためのものです。
 
-- After compiling a circuit (e.g., with Circom), you typically get:
+- 回路（例：Circom）をコンパイルすると、以下のようなファイルが生成されます：
   - `.wasm`
   - `.js`
 
-- These are used to compute the witness from given inputs.
+- これらを使って、入力データから witness を計算します。
 
-The witness includes:
-- Public inputs
-- Private inputs
-- All intermediate values of the computation
+witness には以下が含まれます：
 
-### Related files
+- 公開入力（public inputs）
+- 秘密入力（private inputs）
+- 計算中のすべての中間値
 
-- `.wtns` → Binary format of the witness
-- `.r1cs` → Constraint system (the mathematical representation of the circuit)
+### 関連ファイル
 
-> Note: `.r1cs` defines the circuit constraints, not the witness itself.
+- `.wtns` → witness のバイナリ形式
+- `.r1cs` → 制約システム（回路の数理的な定義）
 
----
-
-## 2. Proving and Verification Keys
-
-These keys are required to generate and verify zero-knowledge proofs.
-
-They are generated during the **trusted setup** phase, depending on the proving system (e.g., Groth16, PLONK).
-
-### Key files
-
-- `.zkey` → Proving key (used to generate proofs)
-- `.vkey.json` → Verification key (used to verify proofs)
-
-### Roles
-
-- Prover:
-  - Uses `.zkey` + witness → generates a proof
-
-- Verifier:
-  - Uses proof + `.vkey` → verifies correctness
+> ※ `.r1cs` は witness ではなく、「回路の制約（数式）」を表すファイルです。
 
 ---
 
-## 3. Verifier Contract
+## 2. Proving Key / Verification Key（証明鍵と検証鍵）
 
-The verifier contract is a smart contract used to verify proofs on-chain.
+これらは、ゼロ知識証明を「生成・検証」するために必要な鍵です。
 
-- Usually generated in Solidity (`.sol`)
-- Often auto-generated using tools like snarkjs
+- **Trusted Setup（信頼されたセットアップ）** の段階で生成されます
+- 使用する証明方式（例：Groth16、PLONK）によって異なります
 
-The contract contains:
-- Verification logic
-- Embedded verification key (`.vkey`)
+### 主なファイル
 
-### Usage
+- `.zkey` → Proving Key（証明生成に使用）
+- `.vkey.json` → Verification Key（検証に使用）
 
-1. A user submits a proof
-2. The contract verifies it
-3. Returns valid / invalid
+### 役割
 
----
+- Prover（証明者）  
+  → `.zkey` と witness を使って proof を生成する
 
-## Pipeline Overview
-
+- Verifier（検証者）  
+  → proof と `.vkey` を使って正しさを検証する
 
 ---
 
-## Summary
+## 3. Verifier Contract（検証コントラクト）
 
-- Witness = all computation values (inputs + intermediate)
-- `.r1cs` = circuit constraints
-- `.zkey` = proving key
-- `.vkey` = verification key
-- Contract = on-chain verifier
+Verifier Contract は、ブロックチェーン上で proof を検証するためのスマートコントラクトです。
+
+- 通常は Solidity（`.sol`）形式で生成されます
+- snarkjs などのツールで自動生成されることが多いです
+
+このコントラクトには：
+
+- 検証ロジック
+- Verification Key（`.vkey`）
+
+が含まれています。
+
+### 使用の流れ
+
+1. ユーザーが proof を送信
+2. コントラクトが検証
+3. 正しければ「valid」、そうでなければ「invalid」
 
 ---
 
-## References (optional)
+## パイプライン概要
+
+
+---
+
+## まとめ
+
+- witness = 入力 + 中間計算を含むすべての値
+- `.r1cs` = 回路の制約（数式）
+- `.zkey` = 証明生成用の鍵
+- `.vkey` = 検証用の鍵
+- Contract = オンチェーンでの検証機構
+
+---
+
+## 参考（任意）
 
 - Circom
 - snarkjs
+
+
 
