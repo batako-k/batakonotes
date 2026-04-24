@@ -1,6 +1,6 @@
  Kate-Zaverucha-Goldberg (KZG) Commitment 
 
-1．commit
+1commit
  
 2.open
 
