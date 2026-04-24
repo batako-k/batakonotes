@@ -1,10 +1,10 @@
  Kate-Zaverucha-Goldberg (KZG) Commitment 
 
- 1．commit
+1．commit
  
- 2.open
+2.open
 
- 3.
+3.
 
  楕円曲線暗号（ペアリング）
 秘密の値 s を使った事前セットアップ
