@@ -14,3 +14,6 @@ s：秘密（誰も知らない）
 G：楕円曲線の生成元
 
  多項式を「s に代入した値」に圧縮してる
+
+ Trusted SetupTrusted Setup
+ Trusted Setup
