@@ -1,7 +1,9 @@
  Kate-Zaverucha-Goldberg (KZG) Commitment 
 
  1．commit
+ 
  2.open
+
  3.
 
  楕円曲線暗号（ペアリング）
