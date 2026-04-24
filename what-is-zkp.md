@@ -87,3 +87,97 @@ $$
 $$
 = t \cdot y^c
 $$
+
+
+
+
+# ZKP Pipeline Overview (Circom / snarkjs)
+
+This note is for beginners trying to understand the ZKP workflow using Circom and snarkjs.
+
+---
+
+## 1. Witness Calculator
+
+The witness calculator is used to generate the **witness** from input data based on a compiled circuit.
+
+- After compiling a circuit (e.g., with Circom), you typically get:
+  - `.wasm`
+  - `.js`
+
+- These are used to compute the witness from given inputs.
+
+The witness includes:
+- Public inputs
+- Private inputs
+- All intermediate values of the computation
+
+### Related files
+
+- `.wtns` → Binary format of the witness
+- `.r1cs` → Constraint system (the mathematical representation of the circuit)
+
+> Note: `.r1cs` defines the circuit constraints, not the witness itself.
+
+---
+
+## 2. Proving and Verification Keys
+
+These keys are required to generate and verify zero-knowledge proofs.
+
+They are generated during the **trusted setup** phase, depending on the proving system (e.g., Groth16, PLONK).
+
+### Key files
+
+- `.zkey` → Proving key (used to generate proofs)
+- `.vkey.json` → Verification key (used to verify proofs)
+
+### Roles
+
+- Prover:
+  - Uses `.zkey` + witness → generates a proof
+
+- Verifier:
+  - Uses proof + `.vkey` → verifies correctness
+
+---
+
+## 3. Verifier Contract
+
+The verifier contract is a smart contract used to verify proofs on-chain.
+
+- Usually generated in Solidity (`.sol`)
+- Often auto-generated using tools like snarkjs
+
+The contract contains:
+- Verification logic
+- Embedded verification key (`.vkey`)
+
+### Usage
+
+1. A user submits a proof
+2. The contract verifies it
+3. Returns valid / invalid
+
+---
+
+## Pipeline Overview
+
+
+---
+
+## Summary
+
+- Witness = all computation values (inputs + intermediate)
+- `.r1cs` = circuit constraints
+- `.zkey` = proving key
+- `.vkey` = verification key
+- Contract = on-chain verifier
+
+---
+
+## References (optional)
+
+- Circom
+- snarkjs
+
