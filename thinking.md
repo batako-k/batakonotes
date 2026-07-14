@@ -9,3 +9,7 @@
 It would probably be much easier if someone were there to guide me, like in school.
 久しぶりに楕円曲線の復習をした
 
+
+20260714
+I'm busy studying for exams.
+I'm struggling with chemistry. I love ZKP... just you wait.
