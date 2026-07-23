@@ -14,3 +14,7 @@ It would probably be much easier if someone were there to guide me, like in scho
 
 I'm busy studying for exams.
 I'm struggling with chemistry. I love ZKP... just you wait.
+
+20260723
+
+My beloved junior colleague
