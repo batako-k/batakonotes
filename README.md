@@ -2,6 +2,6 @@
 
 This repository contains my study notes on:
 
-- Zero-Knowledge Proofs
+- Zero-Knowledge Proof
 - 
 
